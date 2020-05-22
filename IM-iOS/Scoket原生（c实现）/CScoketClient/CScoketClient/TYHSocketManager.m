@@ -130,6 +130,13 @@ static int ConnectionToServer(int client_socket,const char * server_ip,unsigned 
 //收取服务端发送的消息
 - (void)recieveAction{
 
+    /**
+     1、strlen计算字符串的具体长度（只能是字符串），不包括字符串结束符。返回的是字符个数。
+     2、sizeof计算声明后所占的内存数（字节大小），不是实际长度。
+     3、sizeof是一个取字节运算符，而strlen是个函数。
+     4、sizeof的返回值=字符个数*字符所占的字节数，字符实际长度小于定义的长度，此时字符个数就等于定义的长度。若未给出定义的大小，分类讨论，对于字符串数组，字符大 小等于实际的字符个数+1；对于整型数组，字符个数为实际的字符个数。字符串每个字符占1个字节，整型数据每个字符占的字节数需根据系统的位数类确定，32位占4个字节。
+     原文链接：https://blog.csdn.net/apanying/java/article/details/86301992
+     */
     while (1) {
         char recv_Message[1024] = {0};
         recv(self.clientScoket, recv_Message, sizeof(recv_Message), 0);
